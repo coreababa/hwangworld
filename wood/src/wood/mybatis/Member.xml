@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<insert id="regist" parameterType="Member">
+		insert into
+		member(member_no,member_id,member_pw,member_name,member_post,member_addr,member_number,member_level_no)
+		values(member_seq.nextval,#{member_id},#{member_pw},#{member_name},#{member_post},#{member_addr},#{member_number},#{member_level_no})
+	</insert>
+
+	<select id="totalcnt" resultType="Integer">
+		select count(member_id) from
+		member
+	</select>
+
+	<select id="login" parameterType="java.util.HashMap" resultType="Member">
+		select
+		member_no,member_id,member_name,member_post,member_addr,member_number,member_level_no,member_regist_date
+		from member
+		where member_id = #{member_id} and member_pw = #{member_pw}
+		and member_status_no != 3
+	</select>
+
+	<select id="detail" resultType="Member">
+		select
+		m.member_no,m.member_id,m.member_pw,m.member_name,m.member_post,m.member_addr,m.member_number,m.member_level_no,ml.member_level_name,ms.member_status_name,m.member_regist_date
+		from (member m left join member_level ml on m.member_level_no =
+		ml.member_level_no) join member_status ms on m.member_status_no =
+		ms.member_status_no
+		where m.member_no = #{member_no}
+		order by
+		m.member_no desc
+	</select>
+
+	<update id="delete">
+		update member set member_status_no = 3 where
+		member_no = #{member_no}
+	</update>
+
+	<update id="modifyMember" parameterType="Member">
+		update member set
+		member_post = #{member_post}, member_addr = #{member_addr},
+		member_number = #{member_number},member_level_no = #{member_level_no}
+		where member_no = #{member_no} and member_id = #{member_id}
+	</update>
+
+	<update id="modifyPw" parameterType="java.util.HashMap">
+		update member set member_pw
+		= #{newPassword} where member_pw = #{oldPassword} and member_no =
+		#{member_no}
+	</update>
+
+	<!-- <select id="list" resultMap="memberListResultMap"> select m.member_no,m.member_id,m.member_name,m.member_post,m.member_addr,m.member_number,ml.member_level_name,ms.member_status_name,m.member_regist_date 
+		from (member m left join member_level ml on m.member_level_no = ml.member_level_no) 
+		join member_status ms on m.member_status_no = ms.member_status_no order by 
+		m.member_no desc </select> -->
+
+	<select id="list" resultMap="memberListResultMap" parameterType="shop.dto.ParamVO">
+		select * from (
+		select rownum
+		rnum,m.member_no,m.member_id,m.member_name,m.member_post
+		,m.member_addr,m.member_number,m.member_level_name,m.member_status_name,m.member_regist_date
+		from(
+		select * from (member m left join member_level ml on
+		m.member_level_no =
+		ml.member_level_no) join member_status ms on
+		m.member_status_no =
+		ms.member_status_no
+		<where>
+			<choose>
+				<when test="search_sel == 'member_id' and search_txt != '' ">
+					member_id like #{search_txt}
+				</when>
+				<when test="search_sel == 'member_name' and search_txt != ''">
+					member_name like #{search_txt}
+				</when>
+			</choose>
+		</where>
+	     <![CDATA[
+		order by member_no desc) m)
+         where rnum >= #{startrow} and rnum <= #{endrow}
+           ]]>
+
+	</select>
+	<resultMap type="Member" id="memberListResultMap">
+		<id property="member_level_no" column="member_level_no" />
+		<result property="member_no" column="member_no" />
+		<result property="member_id" column="member_id" />
+		<result property="member_name" column="member_name" />
+		<result property="member_post" column="member_post" />
+		<result property="member_addr" column="member_addr" />
+		<result property="member_number" column="member_number" />
+		<result property="memberLevel.member_level_name" column="member_level_name" />
+		<result property="memberStatus.member_status_name" column="member_status_name" />
+		<result property="member_regist_date" column="member_regist_date" />
+	</resultMap>
+</mapper>
