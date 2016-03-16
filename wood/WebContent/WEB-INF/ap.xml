@@ -22,7 +22,8 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://hjhsmile.cafe24.com:3306/hjhsmile" />
+		<property name="url"
+			value="jdbc:mysql://hjhsmile.cafe24.com:3306/hjhsmile" />
 		<property name="username" value="hjhsmile" />
 		<property name="password" value="ghkdwjd1" />
 	</bean>
@@ -40,6 +41,14 @@
 				class="org.mybatis.spring.transaction.SpringManagedTransactionFactory"></bean>
 		</property>
 	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource" p:configLocation="classpath:SqlMapConfig.xml" />
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
 
 
 </beans>

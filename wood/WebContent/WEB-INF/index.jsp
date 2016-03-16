@@ -10,6 +10,10 @@
 <script src="js/jquery-1.12.1"></script>
 </head>
 <body>
-ddddd
+<c:forEach items="${memberList }" var="x">
+${x }
+
+</c:forEach>
+
 </body>
 </html>

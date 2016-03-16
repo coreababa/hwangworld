@@ -12,12 +12,12 @@ import wood.shop.dto.ParamTO;
 public class MemberDAOImpl implements MemberDAO {
 
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate mybatis;
 
 
 	@Override
 	public ArrayList<Member> memberList(String queryId, ParamTO params) {
-		return (ArrayList) sqlSession.selectList(queryId, params);
+		return (ArrayList) mybatis.selectList(queryId, params);
 		
 	}
 	

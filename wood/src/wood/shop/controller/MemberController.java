@@ -22,7 +22,7 @@ public class MemberController {
 	private MemberService membersvc;
 	@RequestMapping("/index.do")
 	public ModelAndView mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
-		String queryId="member.list";
+		String queryId="member.list2";
 		ArrayList<Member> memberList= membersvc.memberList(queryId, params);
 		mav.addObject("memberList", memberList);
 		mav.setViewName("index");
