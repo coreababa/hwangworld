@@ -57,7 +57,7 @@
 		join member_status ms on m.member_status_no = ms.member_status_no order by 
 		m.member_no desc </select> -->
 
-	<select id="list" resultMap="memberListResultMap" parameterType="shop.dto.ParamVO">
+	<select id="list" resultMap="memberListResultMap" parameterType="wood.shop.dto.ParamTO">
 		select * from (
 		select rownum
 		rnum,m.member_no,m.member_id,m.member_name,m.member_post
