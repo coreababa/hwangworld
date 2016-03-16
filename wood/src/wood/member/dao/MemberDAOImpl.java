@@ -18,7 +18,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public ArrayList<Member> memberList(String queryId, ParamTO params) {
 		return (ArrayList) mybatis.selectList(queryId, params);
-		
 	}
 	
 	
