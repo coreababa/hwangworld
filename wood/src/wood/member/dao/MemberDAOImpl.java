@@ -1,6 +1,7 @@
 package wood.member.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,19 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSessionTemplate mybatis;
 
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public ArrayList<Member> memberList(String queryId, ParamTO params) {
 		return (ArrayList) mybatis.selectList(queryId, params);
 	}
-	
+
+
+
+	@Override
+	public Member selById(String queryid, Map<String, Object> map) {
+		return mybatis.selectOne(queryid, map);
+	}
+
 	
 
 }

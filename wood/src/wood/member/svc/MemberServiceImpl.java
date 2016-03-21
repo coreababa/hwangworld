@@ -1,6 +1,7 @@
 package wood.member.svc;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<Member> memberList(String queryId, ParamTO params) {
 		return MemberDAO.memberList(queryId, params);
+	}
+
+	@Override
+	public Member selById(String queryid, Map<String, Object> map) {
+		return MemberDAO.selById(queryid, map);
 	}
 	
 }

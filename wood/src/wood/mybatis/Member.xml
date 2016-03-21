@@ -8,6 +8,12 @@
         select * from member
         
     </select>
+    
+    <select id="selById"  resultType="Member" parameterType="java.util.HashMap">
+        select * from member where id_str= #{id}
+    </select>
+    
+    
 	<insert id="regist" parameterType="Member">
 		insert into
 		member(member_no,member_id,member_pw,member_name,member_post,member_addr,member_number,member_level_no)
