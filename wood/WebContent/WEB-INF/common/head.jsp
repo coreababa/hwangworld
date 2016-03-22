@@ -68,11 +68,12 @@ ${myInfo }<br>
 			<div class="col-sm-8">
 				<div class="shop-menu pull-right">
 					<ul class="nav navbar-nav">
-						<li><a href="#"><i class="fa fa-user"></i> 회원가입</a></li>
+						<li><a href="regist_form.do"><i class="fa fa-user"></i> 회원가입</a></li>
 						
 						<li><a href="cart.html"><i class="fa fa-shopping-cart"></i>
 								Cart</a></li>
 						<li><a href="login_form.do"><i class="fa fa-lock"></i> 로그인</a></li>
+						<li><a href="logout.do"><i class="fa fa-unlock"></i> 로그아웃</a></li>
 					</ul>
 				</div>
 			</div>

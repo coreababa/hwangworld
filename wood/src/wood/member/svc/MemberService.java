@@ -11,4 +11,6 @@ public interface MemberService {
 	public ArrayList<Member> memberList(String queryId, ParamTO params);
 
 	public Member selById(String queryid, Map<String, Object> map);
+
+	public int insert(String queryid, Member member);
 }

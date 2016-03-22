@@ -29,6 +29,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return mybatis.selectOne(queryid, map);
 	}
 
+
+
+	@Override
+	public int insert(String queryid, Member member) {
+		return mybatis.insert(queryid, member);
+	}
+
 	
 
 }

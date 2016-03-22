@@ -14,10 +14,21 @@
     </select>
     
     
-	<insert id="regist" parameterType="Member">
-		insert into
-		member(member_no,member_id,member_pw,member_name,member_post,member_addr,member_number,member_level_no)
-		values(member_seq.nextval,#{member_id},#{member_pw},#{member_name},#{member_post},#{member_addr},#{member_number},#{member_level_no})
+	<insert id="insert" parameterType="Member">
+		insert into member( 
+		id_str,
+		passwd_str,
+		name_str,
+		email_str,
+		post_str,
+		addr_str,
+		addr2_str,
+		tel_str,
+		cel_str,
+		
+		remote_addr_str )
+values(#{id_str} ,#{passwd_str} ,#{name_str} ,#{email_str} ,#{post_str},
+#{addr_str} ,#{addr2_str} ,#{tel_str} ,#{cel_str}  ,#{remote_addr_str}  )
 	</insert>
 
 	<select id="totalcnt" resultType="Integer">

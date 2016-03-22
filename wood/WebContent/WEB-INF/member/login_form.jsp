@@ -4,12 +4,12 @@
 <script>
 	$("#login").submit(function() {
 		var postData = $(this).serializeArray();
-	    var formURL = $(this).attr("action");
-	    var formMethod = $(this).attr("method");
+		var formURL = $(this).attr("action");
+		var formMethod = $(this).attr("method");
 		$.ajax(
 
-		{
-			type: formMethod,
+			{
+			type : formMethod,
 			url : formURL,
 			data : postData,
 			success : function(data) {
@@ -34,7 +34,7 @@
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="ID" name="id"
-									type="text" >
+									type="text">
 							</div>
 							<div class="form-group">
 								<input class="form-control" placeholder="Password" name="passwd"
@@ -42,7 +42,8 @@
 							</div>
 							<!-- Change this to a button or input when using this as a form -->
 						</fieldset>
-					<input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
+						<input type="submit" class="btn btn-lg btn-success btn-block"
+							value="Login">
 					</form>
 				</div>
 			</div>

@@ -9,6 +9,8 @@ public class Member {
 	private String post_str;
 	private String addr_str;
 	private String addr2_str;
+	private String tel_str;
+	private String cel_str;
 	private int level_no;
 	private int status_no;
 	private String reg_date;
@@ -18,9 +20,10 @@ public class Member {
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Member(int member_no, String id_str, String passwd_str, String name_str, String email_str, String post_str,
-			String addr_str, String addr2_str, int level_no, int status_no, String reg_date, String update_date,
-			String del_date, String remote_addr_str) {
+			String addr_str, String addr2_str, String tel_str, String cel_str, int level_no, int status_no,
+			String reg_date, String update_date, String del_date, String remote_addr_str) {
 		super();
 		this.member_no = member_no;
 		this.id_str = id_str;
@@ -30,6 +33,8 @@ public class Member {
 		this.post_str = post_str;
 		this.addr_str = addr_str;
 		this.addr2_str = addr2_str;
+		this.tel_str = tel_str;
+		this.cel_str = cel_str;
 		this.level_no = level_no;
 		this.status_no = status_no;
 		this.reg_date = reg_date;
@@ -37,6 +42,23 @@ public class Member {
 		this.del_date = del_date;
 		this.remote_addr_str = remote_addr_str;
 	}
+
+	public String getTel_str() {
+		return tel_str;
+	}
+
+	public void setTel_str(String tel_str) {
+		this.tel_str = tel_str;
+	}
+
+	public String getCel_str() {
+		return cel_str;
+	}
+
+	public void setCel_str(String cel_str) {
+		this.cel_str = cel_str;
+	}
+
 	public int getMember_no() {
 		return member_no;
 	}
@@ -141,13 +163,15 @@ public class Member {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Member [member_no=" + member_no + ", id_str=" + id_str + ", passwd_str=" + passwd_str + ", name_str="
 				+ name_str + ", email_str=" + email_str + ", post_str=" + post_str + ", addr_str=" + addr_str
-				+ ", addr2_str=" + addr2_str + ", level_no=" + level_no + ", status_no=" + status_no + ", reg_date="
-				+ reg_date + ", update_date=" + update_date + ", del_date=" + del_date + ", remote_addr_str="
-				+ remote_addr_str + "]";
+				+ ", addr2_str=" + addr2_str + ", tel_str=" + tel_str + ", cel_str=" + cel_str + ", level_no="
+				+ level_no + ", status_no=" + status_no + ", reg_date=" + reg_date + ", update_date=" + update_date
+				+ ", del_date=" + del_date + ", remote_addr_str=" + remote_addr_str + "]";
 	}
+	
 	
 }

@@ -25,5 +25,10 @@ public class MemberServiceImpl implements MemberService {
 	public Member selById(String queryid, Map<String, Object> map) {
 		return MemberDAO.selById(queryid, map);
 	}
+
+	@Override
+	public int insert(String queryid, Member member) {
+		return MemberDAO.insert(queryid, member);
+	}
 	
 }
