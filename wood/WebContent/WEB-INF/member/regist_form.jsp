@@ -55,7 +55,7 @@
 			if (form_check($("#regist"))) {
 				$("#regist").submit();
 			}
-			
+
 		});
 
 		$("#passwd_re").keyup(function() {
@@ -75,7 +75,7 @@
 	});
 
 	function form_check(form) {
-		
+
 		/* 
 		inputs.each(function(i, value) {
 			 if($(this).text().match('Replace Me')) {
@@ -90,6 +90,16 @@
 		});
 		 */
 		var inputs = $("form input[for]");
+
+		if ($("#id_chk").val() == "N") {
+			$("#id_str").focus();
+			$("#id_str").attr("placeholder", $("#id_str").attr("placeholder"));
+			$("#id_str").css({
+				"border" : "2px solid red"
+			});
+			return false;
+		}
+
 		inputs.each(function() {
 			var flag = true;
 			if ($(this).val() == "") {
@@ -98,7 +108,7 @@
 				$(this).css({
 					"border" : "2px solid red"
 				});
-				flag=false;
+				flag = false;
 				return false;
 			} else {
 				$(this).css({
@@ -109,14 +119,6 @@
 			return flag;
 		});
 
-		if ($("#id_chk").val() == "N") {
-			$("#id_str").focus();
-			$("#id_str").attr("placeholder", $("#id_str").attr("placeholder"));
-			$("#id_str").css({
-				"border" : "2px solid red"
-			});
-			return false;
-		}
 		if ($("#pass_chk").val() == "N") {
 			$("#passwd_re").focus();
 			$("#passwd_re").attr("placeholder",
