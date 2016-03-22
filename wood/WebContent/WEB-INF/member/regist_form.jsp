@@ -51,6 +51,7 @@
 		}).keyup();
 
 		$("#regist_submit").click(function() {
+			alert(form_check($("#regist")));
 			if (form_check($("#regist"))) {
 				$("#regist").submit();
 			}
@@ -90,20 +91,22 @@
 		 */
 		var inputs = $("form input[for]");
 		inputs.each(function() {
+			var flag = true;
 			if ($(this).val() == "") {
 				$(this).focus();
 				$(this).attr("placeholder", $(this).attr("placeholder"));
 				$(this).css({
 					"border" : "2px solid red"
 				});
+				flag=false;
 				return false;
 			} else {
 				$(this).css({
 					"border" : "2px solid green"
 				});
-				return;
+				return flag;
 			}
-			return;
+			return flag;
 		});
 
 		if ($("#id_chk").val() == "N") {
@@ -123,7 +126,7 @@
 			});
 			return false;
 		}
-		return;
+		return true;
 
 	}
 

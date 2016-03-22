@@ -25,10 +25,10 @@
 		addr2_str,
 		tel_str,
 		cel_str,
-		
+		reg_date,
 		remote_addr_str )
 values(#{id_str} ,#{passwd_str} ,#{name_str} ,#{email_str} ,#{post_str},
-#{addr_str} ,#{addr2_str} ,#{tel_str} ,#{cel_str}  ,#{remote_addr_str}  )
+#{addr_str} ,#{addr2_str} ,#{tel_str} ,#{cel_str} ,now() ,#{remote_addr_str}  )
 	</insert>
 
 	<select id="totalcnt" resultType="Integer">
