@@ -74,6 +74,7 @@ ${myInfo }<br>
 								Cart</a></li>
 						<li><a href="login_form.do"><i class="fa fa-lock"></i> 로그인</a></li>
 						<li><a href="logout.do"><i class="fa fa-unlock"></i> 로그아웃</a></li>
+						<li><a href="admin/index.do"><i class="fa fa-unlock"></i> 관리자</a></li>
 					</ul>
 				</div>
 			</div>
@@ -98,7 +99,7 @@ ${myInfo }<br>
 				<div class="mainmenu pull-left">
 					<ul class="nav navbar-nav collapse navbar-collapse">
 						<li><a href="index.html" class="active">Home</a></li>
-						<li class="dropdown"><a href="#">Shop<i
+						<!-- <li class="dropdown"><a href="#">Shop<i
 								class="fa fa-angle-down"></i></a>
 							<ul role="menu" class="sub-menu">
 								<li><a href="shop.html">Products</a></li>
@@ -106,14 +107,10 @@ ${myInfo }<br>
 								<li><a href="checkout.html">Checkout</a></li>
 								<li><a href="cart.html">Cart</a></li>
 								<li><a href="login.html">Login</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#">Blog<i
-								class="fa fa-angle-down"></i></a>
-							<ul role="menu" class="sub-menu">
-								<li><a href="blog.html">Blog List</a></li>
-								<li><a href="blog-single.html">Blog Single</a></li>
-							</ul></li>
-						<li><a href="404.html">404</a></li>
+							</ul></li> -->
+						<li><a href="#">회사소개</a>
+							</li>
+						<li><a href="#">제품안내</a></li>
 						<li><a href="contact-us.html">Contact</a></li>
 					</ul>
 				</div>

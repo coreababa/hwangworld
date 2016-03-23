@@ -4,18 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-    <select id="list2"  resultType="Member">
-        select * from member
-        
-    </select>
-    
-    <select id="selById"  resultType="Member" parameterType="java.util.HashMap">
-        select * from member where id_str= #{id}
-    </select>
-    
-    
+	<select id="list2" resultType="Member">
+		select * from member
+
+	</select>
+
+	<select id="selById" resultType="Member" parameterType="java.util.HashMap">
+		select * from member where member_no= #{member_no}
+	</select>
+
+
+
+
 	<insert id="insert" parameterType="Member">
-		insert into member( 
+		insert into member(
 		id_str,
 		passwd_str,
 		name_str,
@@ -27,9 +29,27 @@
 		cel_str,
 		reg_date,
 		remote_addr_str )
-values(#{id_str} ,#{passwd_str} ,#{name_str} ,#{email_str} ,#{post_str},
-#{addr_str} ,#{addr2_str} ,#{tel_str} ,#{cel_str} ,now() ,#{remote_addr_str}  )
+		values(#{id_str} ,#{passwd_str} ,#{name_str} ,#{email_str} ,#{post_str},
+		#{addr_str} ,#{addr2_str} ,#{tel_str} ,#{cel_str} ,now() ,#{remote_addr_str} )
 	</insert>
+
+
+	<update id="update" parameterType="java.util.HashMap">
+		update
+		member set
+		name_str = #{name_str},
+		email_str = #{email_str},
+		post_str = #{post_str},
+		addr_str = #{addr_str},
+		addr2_str = #{addr2_str},
+		tel_str = #{tel_str},
+		cel_str = #{cel_str},
+		update_date = now(),
+		remote_addr_str = #{remote_addr_str}
+		where member_no= #{member_no}
+	</update>
+
+
 
 	<select id="totalcnt" resultType="Integer">
 		select count(member_id) from

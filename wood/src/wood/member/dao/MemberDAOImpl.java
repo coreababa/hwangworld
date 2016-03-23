@@ -36,6 +36,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return mybatis.insert(queryid, member);
 	}
 
+
+
+	@Override
+	public int update(String queryid,  Map<String, Object> map) {
+		return mybatis.update(queryid, map);
+	}
+
 	
 
 }

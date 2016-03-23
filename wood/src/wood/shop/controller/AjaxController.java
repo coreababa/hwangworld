@@ -1,5 +1,6 @@
 package wood.shop.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import wood.member.svc.MemberService;
-import wood.shop.dto.Member;	
+import wood.shop.dto.Member;
+import wood.shop.dto.ParamTO;	
 
 @Controller
 public class AjaxController {
@@ -31,4 +35,17 @@ public class AjaxController {
 		
 		return chk;
 	}
+	
+	@RequestMapping("/admin/object.do")
+	@ResponseBody
+	public ArrayList<Member> mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
+		String queryId="member.list2";
+		ArrayList<Member> memberList= membersvc.memberList(queryId, params);
+		return memberList;
+	}
+	
+	
+	
+
+	
 }

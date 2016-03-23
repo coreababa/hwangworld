@@ -30,5 +30,11 @@ public class MemberServiceImpl implements MemberService {
 	public int insert(String queryid, Member member) {
 		return MemberDAO.insert(queryid, member);
 	}
+
+	@Override
+	public int update(String queryid, Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return MemberDAO.update(queryid, map);
+	}
 	
 }

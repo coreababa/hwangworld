@@ -12,4 +12,6 @@ public interface MemberDAO {
 	public Member selById(String queryid, Map<String, Object> map);
 
 	public int insert(String queryid, Member member);
+
+	public int update(String queryid, Map<String, Object> map);
 }

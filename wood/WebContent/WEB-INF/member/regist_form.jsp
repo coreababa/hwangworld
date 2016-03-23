@@ -120,7 +120,7 @@
 		});
 
 		if ($("#pass_chk").val() == "N") {
-			$("#passwd_re").focus();
+			$("#passwd_str").focus();
 			$("#passwd_re").attr("placeholder",
 					$("#passwd_re").attr("placeholder"));
 			$("#passwd_re").css({

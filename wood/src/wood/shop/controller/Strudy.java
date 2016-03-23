@@ -12,4 +12,14 @@ public class Strudy {
 		mView.setViewName("/m/jm1");
 		return mView;
 	}
+	@RequestMapping("/jm2.do")
+	public ModelAndView jm2(ModelAndView mView){
+		mView.setViewName("/m/jm2");
+		return mView;
+	}
+	@RequestMapping("/you.do")
+	public ModelAndView you(ModelAndView mView){
+		mView.setViewName("/m/you");
+		return mView;
+	}
 }
