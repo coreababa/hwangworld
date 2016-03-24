@@ -2,23 +2,32 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
-	$("#login").submit(function() {
-		var postData = $(this).serializeArray();
-		var formURL = $(this).attr("action");
-		var formMethod = $(this).attr("method");
-		$.ajax(
+	$(document).ready(function() {
+		$("#login_btn").click(function() {
+			var postData = $("#login").serializeArray();
+			var formURL = $("#login").attr("action");
+			var formMethod = $("#login").attr("method");
+			$.ajax(
 
 			{
-			type : formMethod,
-			url : formURL,
-			data : postData,
-			success : function(data) {
-				console.log(data);
+				type : formMethod,
+				url : formURL,
+				data : postData,
+				dataType: "text",
+				contentType: "application/text;charset=utf8",
+				success : function(data) {
+					if (data != "") {
+						alert(data);
+						location.href = "login_form.do";
+					} else {
+						location.href = "index.do";
+					}
+				}
+
 			}
 
-		}
-
-		);
+			);
+		});
 	});
 </script>
 <section>
@@ -42,8 +51,8 @@
 							</div>
 							<!-- Change this to a button or input when using this as a form -->
 						</fieldset>
-						<input type="submit" class="btn btn-lg btn-success btn-block"
-							value="Login">
+						<input type="button" id="login_btn"
+							class="btn btn-lg btn-success btn-block" value="Login">
 					</form>
 				</div>
 			</div>

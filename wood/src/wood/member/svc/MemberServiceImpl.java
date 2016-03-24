@@ -36,5 +36,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return MemberDAO.update(queryid, map);
 	}
+
+	@Override
+	public int delete(String queryid, Map<String, Object> map) {
+		return MemberDAO.delete(queryid, map);
+	}
+
+
 	
 }

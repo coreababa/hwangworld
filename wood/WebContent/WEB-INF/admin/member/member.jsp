@@ -22,7 +22,9 @@
 				type: 'post',
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success : function(data) {
-					alert("Successfully submitted.")
+					//$('#myModal').modal('show');
+					location.reload();
+					
 				}
 
 			});
@@ -41,42 +43,24 @@
 							"columnDefs" : [ {
 								"targets" : -1,
 								"data" : "remote_addr_str",
-								"defaultContent" : "<button>Click!</button>"
+								"defaultContent" : "<button id='update_btn'>수정</button> <button id='delete_btn'>삭제</button>"
 							} ],
 							"ajax" : {
 								"url" : "../admin/object.do",
 								"dataSrc" : "",
 							},
 							"columns" : [ {
-								"data" : "member_no"
+								"data" : "member_no","width": "10%"
 							}, {
 								"data" : "id_str"
-							}, {
-								"data" : "passwd_str"
-							}, {
+							},  {
 								"data" : "name_str"
 							}, {
 								"data" : "email_str"
 							}, {
-								"data" : "post_str"
-							}, {
-								"data" : "addr_str"
-							}, {
-								"data" : "addr2_str"
-							}, {
-								"data" : "tel_str"
-							}, {
 								"data" : "cel_str"
 							}, {
 								"data" : "level_no"
-							}, {
-								"data" : "status_no"
-							}, {
-								"data" : "reg_date"
-							}, {
-								"data" : "update_date"
-							}, {
-								"data" : "del_date"
 							}, {
 								"data" : null
 							} ]
@@ -84,7 +68,7 @@
 
 				var table = $('#example').DataTable();
 
-				$('#example tbody').on('click', 'button', function() {
+				$('#example tbody').on('click', '#update_btn', function() {
 					// var data = table.row( this ).data();
 					var data = table.row($(this).parents('tr')).data();
 					var member_no = data.member_no;
@@ -106,7 +90,29 @@
 					});
 					$('#myModal').modal('show');
 
-					//alert('You clicked on ' + data.id_str + '\'s row');
+					
+				});
+				
+				$('#example tbody').on('click', '#delete_btn', function() {
+					// var data = table.row( this ).data();
+					var data = table.row($(this).parents('tr')).data();
+					var member_no = data.member_no;
+					$.ajax({
+						url : "../admin/member_delete.do",
+						type : "GET",
+						data : "member_no=" + member_no,
+						dataType : "json",
+						success : function(data) {
+							alert("삭제완료");
+							location.reload();
+						},
+						error : function() {
+							alert("에러났어");
+						}
+					});
+					
+
+				
 				});
 
 			});
@@ -122,43 +128,26 @@
 <table id="example" class="display" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th>member_no</th>
-			<th>id_str</th>
-			<th>passwd_str</th>
-			<th>name_str</th>
-			<th>email_str</th>
-			<th>post_str</th>
-			<th>addr_str</th>
-			<th>addr2_str</th>
-			<th>tel_str</th>
-			<th>cel_str</th>
-			<th>level_no</th>
-			<th>status_no</th>
-			<th>reg_date</th>
-			<th>update_date</th>
-			<th>del_date</th>
-			<th>remote_addr_str</th>
+			<th>번호</th>
+			<th>ID</th>
+			<th>이름</th>
+			<th>이메일</th>
+			<th>연락처</th>
+			<th>등급</th>
+			<th>수정 / 삭제</th>
+			
 
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
-			<th>member_no</th>
-			<th>id_str</th>
-			<th>passwd_str</th>
-			<th>name_str</th>
-			<th>email_str</th>
-			<th>post_str</th>
-			<th>addr_str</th>
-			<th>addr2_str</th>
-			<th>tel_str</th>
-			<th>cel_str</th>
-			<th>level_no</th>
-			<th>status_no</th>
-			<th>reg_date</th>
-			<th>update_date</th>
-			<th>del_date</th>
-			<th>remote_addr_str</th>
+			<th>번호</th>
+			<th>ID</th>
+			<th>이름</th>
+			<th>이메일</th>
+			<th>연락처</th>
+			<th>등급</th>
+			<th>수정 / 삭제</th>
 
 		</tr>
 	</tfoot>

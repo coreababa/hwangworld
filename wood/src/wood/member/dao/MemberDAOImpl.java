@@ -22,27 +22,22 @@ public class MemberDAOImpl implements MemberDAO {
 		return (ArrayList) mybatis.selectList(queryId, params);
 	}
 
-
-
 	@Override
 	public Member selById(String queryid, Map<String, Object> map) {
 		return mybatis.selectOne(queryid, map);
 	}
 
-
-
 	@Override
 	public int insert(String queryid, Member member) {
 		return mybatis.insert(queryid, member);
 	}
-
-
-
 	@Override
 	public int update(String queryid,  Map<String, Object> map) {
 		return mybatis.update(queryid, map);
 	}
-
-	
+	@Override
+	public int delete(String queryid, Map<String, Object> map) {
+		return mybatis.update(queryid, map);
+	}
 
 }

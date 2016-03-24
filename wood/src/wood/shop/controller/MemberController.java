@@ -26,86 +26,104 @@ import wood.shop.dto.ParamTO;
 public class MemberController {
 	@Autowired
 	private MemberService membersvc;
+
 	@RequestMapping("/index.do")
-	public ModelAndView mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
-		String queryId="member.list2";
-		ArrayList<Member> memberList= membersvc.memberList(queryId, params);
+	public ModelAndView mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map) {
+		String queryId = "member.list2";
+		ArrayList<Member> memberList = membersvc.memberList(queryId, params);
 		mav.addObject("memberList", memberList);
 		mav.setViewName("index");
 		return mav;
 	}
-	
+
 	@RequestMapping("/login_form.do")
-	public ModelAndView login_form(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
+	public ModelAndView login_form(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map) {
 		mav.addObject("include_file", "login_form.jsp");
 		mav.setViewName("/member/member");
 		return mav;
 	}
 	
+	
+
 	@RequestMapping("/regist_form.do")
-	public ModelAndView regist_form(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
+	public ModelAndView regist_form(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map) {
 		mav.addObject("include_file", "regist_form.jsp");
 		mav.setViewName("/member/member");
 		return mav;
 	}
+
 	
-	
-	@RequestMapping("/login.do")
-	public ModelAndView login(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map,HttpSession session){
+	@RequestMapping(value="/login.do", produces="application/text;charset=utf-8")
+	@ResponseBody
+	public String login(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map,
+			HttpSession session) {
 		String queryid = "member.selById";
-		//map.put("id", (String) map.get("id")) ;
-		//map.put("passwd", (String) map.get("passwd")) ;
+		String msg = "";
+		map.put("sel", "id");
 		Member member = membersvc.selById(queryid, map);
-		session.setAttribute("myInfo", member);
-		mav.setViewName("redirect:/index.do");
-		return mav;
+		System.out.println(member);
+		if (member != null) {
+
+			if (member.getId_str().equals(map.get("id")) && member.getPasswd_str().equals(map.get("passwd"))) {
+				session.setAttribute("myInfo", member);
+			} else {
+				msg="회원정보가 틀립니다.";
+			}
+		}else{
+			msg="회원정보가 틀립니다.";
+		}
+		System.out.println(msg);
+		return msg;
 	}
+
 	@RequestMapping("/regist.do")
-	public ModelAndView regist(HttpServletRequest request, ModelAndView mav, ParamTO params, Member member, HttpSession session){
+	public ModelAndView regist(HttpServletRequest request, ModelAndView mav, ParamTO params, Member member,
+			HttpSession session) {
 		String queryid = "member.insert";
-		//map.put("id", (String) map.get("id")) ;
-		//map.put("passwd", (String) map.get("passwd")) ;
+		// map.put("id", (String) map.get("id")) ;
+		// map.put("passwd", (String) map.get("passwd")) ;
 		member.setRemote_addr_str(request.getRemoteAddr());
 		int re = membersvc.insert(queryid, member);
 		session.setAttribute("myInfo", member);
 		mav.setViewName("redirect:/index.do");
 		return mav;
 	}
-	
-	@ResponseBody	
-	@RequestMapping(value="/admin/member_update.do")
-	public void update(HttpServletRequest request, ModelAndView mav,@RequestParam Map<String, Object> map, HttpSession session){
+
+	@ResponseBody
+	@RequestMapping(value = "/admin/member_update.do" )
+	public int update(HttpServletRequest request, ModelAndView mav, @RequestParam Map<String, Object> map,
+			HttpSession session) {
 		String queryid = "member.update";
-		
-		//map.put("id", (String) map.get("id")) ;
-		//map.put("passwd", (String) map.get("passwd")) ;
 		map.put("remote_addr_str", request.getRemoteAddr());
+		return membersvc.update(queryid, map);
 		
-		
-		int re = membersvc.update(queryid, map);
-		//session.setAttribute("myInfo", member);
-		//mav.setViewName("redirect:/admin/index.do");
-		//return mav;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/admin/member_delete.do" )
+	public int delete(@RequestParam int member_no, Map<String, Object> map,HttpServletRequest request) {
+		String queryid = "member.delete";
+		map.put("member_no", member_no);
+		map.put("remote_addr_str", request.getRemoteAddr());
+		System.out.println(map);
+		return membersvc.delete(queryid, map);
+	}
+
 	@RequestMapping("/admin/member_form.do")
 	@ResponseBody
-	public Member memberForm(@RequestParam int member_no,Map<String, Object> map){
+	public Member memberForm(@RequestParam int member_no, Map<String, Object> map) {
 		String queryid = "member.selById";
+		map.put("sel", "member_no");
 		map.put("member_no", member_no);
-		
-		//map.put("id", (String) map.get("id")) ;
-		//map.put("passwd", (String) map.get("passwd")) ;
 		Member member = membersvc.selById(queryid, map);
-		
 		return member;
 	}
-		
+
 	@RequestMapping("/logout.do")
-	public ModelAndView logout(ModelAndView mav,HttpSession session){
+	public ModelAndView logout(ModelAndView mav, HttpSession session) {
 		session.removeAttribute("myInfo");
 		session.invalidate();
 		mav.setViewName("redirect:/index.do");
 		return mav;
 	}
-	
+
 }

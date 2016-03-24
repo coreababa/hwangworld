@@ -5,15 +5,14 @@
 <mapper namespace="member">
 
 	<select id="list2" resultType="Member">
-		select * from member
-
+		select * from member where status_no=0;
 	</select>
-
+	
 	<select id="selById" resultType="Member" parameterType="java.util.HashMap">
-		select * from member where member_no= #{member_no}
+		select * from member where
+		<if test="sel =='id'"> id_str= #{id}</if>
+	     <if test="sel =='member_no'">member_no= #{member_no}</if>
 	</select>
-
-
 
 
 	<insert id="insert" parameterType="Member">
@@ -32,7 +31,15 @@
 		values(#{id_str} ,#{passwd_str} ,#{name_str} ,#{email_str} ,#{post_str},
 		#{addr_str} ,#{addr2_str} ,#{tel_str} ,#{cel_str} ,now() ,#{remote_addr_str} )
 	</insert>
-
+	
+	<update id="delete" parameterType="java.util.HashMap">
+		update
+		member set
+		status_no = 1,
+		del_date = now(),
+		remote_addr_str = #{remote_addr_str}
+		where member_no= #{member_no}
+	</update>
 
 	<update id="update" parameterType="java.util.HashMap">
 		update
@@ -74,11 +81,6 @@
 		order by
 		m.member_no desc
 	</select>
-
-	<update id="delete">
-		update member set member_status_no = 3 where
-		member_no = #{member_no}
-	</update>
 
 	<update id="modifyMember" parameterType="Member">
 		update member set

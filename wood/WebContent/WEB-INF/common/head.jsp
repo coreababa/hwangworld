@@ -12,7 +12,6 @@
 <script src="js/jquery.prettyPhoto.js"></script>
 <script src="js/main.js"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link href="css/prettyPhoto.css" rel="stylesheet">
 <link href="css/price-range.css" rel="stylesheet">
@@ -23,7 +22,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
 <![endif]-->
-${myInfo }<br>
+내 정보 ${myInfo }<br>
 <header id="header"><!--header-->
 <div class="header_top">
 	<!--header_top-->
@@ -72,6 +71,7 @@ ${myInfo }<br>
 						
 						<li><a href="cart.html"><i class="fa fa-shopping-cart"></i>
 								Cart</a></li>
+						
 						<li><a href="login_form.do"><i class="fa fa-lock"></i> 로그인</a></li>
 						<li><a href="logout.do"><i class="fa fa-unlock"></i> 로그아웃</a></li>
 						<li><a href="admin/index.do"><i class="fa fa-unlock"></i> 관리자</a></li>
@@ -98,7 +98,7 @@ ${myInfo }<br>
 				</div>
 				<div class="mainmenu pull-left">
 					<ul class="nav navbar-nav collapse navbar-collapse">
-						<li><a href="index.html" class="active">Home</a></li>
+						<li><a href="index.do" class="active">Home</a></li>
 						<!-- <li class="dropdown"><a href="#">Shop<i
 								class="fa fa-angle-down"></i></a>
 							<ul role="menu" class="sub-menu">
