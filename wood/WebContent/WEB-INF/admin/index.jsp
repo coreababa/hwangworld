@@ -63,7 +63,7 @@
 		<jsp:include page="nav.jsp"></jsp:include>
 
 		<div id="page-wrapper">
-			<jsp:include page="member/member.jsp"></jsp:include>
+			<jsp:include page="${include_file }"></jsp:include>
 		</div>
 		<!-- /#page-wrapper -->
 

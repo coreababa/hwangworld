@@ -18,14 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
+import wood.member.svc.MemberLevelService;
 import wood.member.svc.MemberService;
 import wood.shop.dto.Member;
+import wood.shop.dto.MemberLevel;
 import wood.shop.dto.ParamTO;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService membersvc;
+	@Autowired
+	private MemberLevelService memberLevelsvc;
 
 	@RequestMapping("/index.do")
 	public ModelAndView mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map) {
@@ -42,8 +46,6 @@ public class MemberController {
 		mav.setViewName("/member/member");
 		return mav;
 	}
-	
-	
 
 	@RequestMapping("/regist_form.do")
 	public ModelAndView regist_form(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map) {
@@ -51,7 +53,6 @@ public class MemberController {
 		mav.setViewName("/member/member");
 		return mav;
 	}
-
 	
 	@RequestMapping(value="/login.do", produces="application/text;charset=utf-8")
 	@ResponseBody
@@ -99,6 +100,18 @@ public class MemberController {
 		
 	}
 	@ResponseBody
+	@RequestMapping(value = "/admin/member_level_update.do" )
+	public int member_level_update(HttpServletRequest request, ModelAndView mav, @RequestParam Map<String, Object> map,
+			HttpSession session) {
+		String queryid = "memberlevel.update";
+		map.put("remote_addr_str", request.getRemoteAddr());
+		return memberLevelsvc.update(queryid, map);
+		
+	}
+	
+	
+		
+	@ResponseBody
 	@RequestMapping(value = "/admin/member_delete.do" )
 	public int delete(@RequestParam int member_no, Map<String, Object> map,HttpServletRequest request) {
 		String queryid = "member.delete";
@@ -117,6 +130,19 @@ public class MemberController {
 		Member member = membersvc.selById(queryid, map);
 		return member;
 	}
+	@RequestMapping("/admin/member_level_form.do")
+	@ResponseBody
+	public MemberLevel member_level_form(@RequestParam int member_level_no, Map<String, Object> map) {
+		String queryid = "memberlevel.selById";
+		map.put("sel", "member_level_no");
+		map.put("member_level_no", member_level_no);
+		MemberLevel memberLevel = memberLevelsvc.selById(queryid, map);
+		System.out.println(memberLevel);
+		return memberLevel;
+	}
+	
+	
+	
 
 	@RequestMapping("/logout.do")
 	public ModelAndView logout(ModelAndView mav, HttpSession session) {

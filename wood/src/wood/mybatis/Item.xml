@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="item">
+
+	<select id="list2" resultType="Item">
+		select * from item;
+	</select>
+	<select id="selById" resultType="Item" parameterType="java.util.HashMap">
+		select * from item where 
+		<if test="sel =='id'"> id_str= #{id}</if>
+	     <if test="sel =='item_no'">item_no= #{item_no}</if>
+	</select>
+	
+
+
+</mapper>

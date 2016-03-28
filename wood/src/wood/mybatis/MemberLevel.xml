@@ -2,38 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="member">
-    
-
-	<select id="list2" resultType="Member">
-		select a.member_no,
-       a.id_str,
-       a.passwd_str,
-       a.name_str,
-       a.email_str,
-       a.post_str,
-       a.addr_str,
-       a.addr2_str,
-       a.tel_str,
-       a.cel_str,
-       a.level_no,
-       a.status_no,
-       a.reg_date,
-       a.update_date,
-       a.del_date,
-       a.remote_addr_str,
-       ml.level_name as member_level_name,
-       ms.status_name as member_status_name
-        from member a left join member_level ml 
-on a.level_no = ml.member_level_no
-left join member_status ms 
-on a.status_no = ms.member_status_no where a.status_no =0;
+<mapper namespace="memberlevel">
+	<select id="list" resultType="MemberLevel">
+		select * from member_level
 	</select>
 	
-	<select id="selById" resultType="Member" parameterType="java.util.HashMap">
-		select * from member where
-		<if test="sel =='id'"> id_str= #{id}</if>
-	     <if test="sel =='member_no'">member_no= #{member_no}</if>
+	<select id="selById" resultType="MemberLevel" parameterType="java.util.HashMap">
+		select * from member_level where  member_level_no = #{member_level_no}
 	</select>
 
 
@@ -64,21 +39,8 @@ on a.status_no = ms.member_status_no where a.status_no =0;
 	</update>
 
 	<update id="update" parameterType="java.util.HashMap">
-		update
-		member set
-		name_str = #{name_str},
-		email_str = #{email_str},
-		post_str = #{post_str},
-		addr_str = #{addr_str},
-		addr2_str = #{addr2_str},
-		tel_str = #{tel_str},
-		cel_str = #{cel_str},
-		update_date = now(),
-		remote_addr_str = #{remote_addr_str}
-		where member_no= #{member_no}
+		update member_level set level_name= #{level_name} where member_level_no =#{member_level_no}
 	</update>
-
-
 
 	<select id="totalcnt" resultType="Integer">
 		select count(member_id) from
@@ -122,33 +84,7 @@ on a.status_no = ms.member_status_no where a.status_no =0;
 		join member_status ms on m.member_status_no = ms.member_status_no order by 
 		m.member_no desc </select> -->
 
-	<select id="list" resultMap="memberListResultMap" parameterType="wood.shop.dto.ParamTO">
-		select * from (
-		select rownum
-		rnum,m.member_no,m.member_id,m.member_name,m.member_post
-		,m.member_addr,m.member_number,m.member_level_name,m.member_status_name,m.member_regist_date
-		from(
-		select * from (member m left join member_level ml on
-		m.member_level_no =
-		ml.member_level_no) join member_status ms on
-		m.member_status_no =
-		ms.member_status_no
-		<where>
-			<choose>
-				<when test="search_sel == 'member_id' and search_txt != '' ">
-					member_id like #{search_txt}
-				</when>
-				<when test="search_sel == 'member_name' and search_txt != ''">
-					member_name like #{search_txt}
-				</when>
-			</choose>
-		</where>
-	     <![CDATA[
-		order by member_no desc) m)
-         where rnum >= #{startrow} and rnum <= #{endrow}
-           ]]>
-
-	</select>
+	
 	<resultMap type="Member" id="memberListResultMap">
 		<id property="member_level_no" column="member_level_no" />
 		<result property="member_no" column="member_no" />

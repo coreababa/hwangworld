@@ -10,14 +10,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import wood.item.svc.ItemService;
+import wood.member.svc.MemberLevelService;
 import wood.member.svc.MemberService;
+import wood.shop.dto.Item;
 import wood.shop.dto.Member;
+import wood.shop.dto.MemberLevel;
 import wood.shop.dto.ParamTO;	
 
 @Controller
 public class AjaxController {
 	@Autowired
 	private MemberService membersvc;
+	@Autowired
+	private ItemService itemsvc;
+	@Autowired
+	private MemberLevelService memberLevelsvc;
 
 	@RequestMapping(value="/mem_chk.do", produces = "application/text; charset=utf8")
 	@ResponseBody 
@@ -32,16 +40,33 @@ public class AjaxController {
 				chk = "1";
 			}
 		}
-		
 		return chk;
 	}
-	
-	@RequestMapping("/admin/object.do")
 	@ResponseBody
+	@RequestMapping("/admin/object.do")
 	public ArrayList<Member> mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
 		String queryId="member.list2";
 		ArrayList<Member> memberList= membersvc.memberList(queryId, params);
 		return memberList;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/admin/itemAjax.do")
+	public ArrayList<Item> itemAjax(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
+		String queryId="item.list2";
+		ArrayList<Item> itemList= itemsvc.itemList(queryId, params);
+		System.out.println(itemList);
+		return itemList;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/admin/member_level_Ajax.do")
+	public ArrayList<MemberLevel> member_level_Ajax(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
+		String queryId="memberlevel.list";
+		ArrayList<MemberLevel> memberLevelList= memberLevelsvc.memberLevelList(queryId, params);
+		System.out.println(memberLevelList);
+		return memberLevelList;
+		
 	}
 	
 	
