@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import wood.item.svc.CategoryService;
 import wood.item.svc.ItemService;
 import wood.member.svc.MemberLevelService;
 import wood.member.svc.MemberService;
+import wood.shop.dto.Category;
 import wood.shop.dto.Item;
 import wood.shop.dto.Member;
 import wood.shop.dto.MemberLevel;
@@ -25,6 +27,8 @@ public class AdminController {
 	private MemberLevelService memberLevelsvc;
 	@Autowired
 	private ItemService itemsvc;
+	@Autowired
+	private CategoryService categorysvc;
 	
 	@RequestMapping("/admin/index.do")
 	public ModelAndView mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
@@ -55,14 +59,22 @@ public class AdminController {
 	}
 	
 	
-		
-	
 	@RequestMapping("/admin/item.do")
 	public ModelAndView item(ModelAndView mav, ParamTO params){
-		String queryId = "member.list2";
+		String queryId = "item.list2";
 		ArrayList<Item> itemList = itemsvc.itemList(queryId, params);
 		mav.addObject("itemList", itemList);
 		mav.addObject("include_file","./item/item.jsp");
+		mav.setViewName("admin/index");
+		return mav;
+	}
+	
+	@RequestMapping("/admin/item_category.do")
+	public ModelAndView item_category(ModelAndView mav, ParamTO params){
+		String queryId = "category.list";
+		ArrayList<Category> categoryList = categorysvc.categoryList(queryId, params);
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("include_file","./item/item_category.jsp");
 		mav.setViewName("admin/index");
 		return mav;
 	}

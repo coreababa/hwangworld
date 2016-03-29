@@ -6,11 +6,13 @@
 		<typeAlias type="wood.shop.dto.Member" alias="Member" />
 		<typeAlias type="wood.shop.dto.MemberLevel" alias="MemberLevel" />
 		<typeAlias type="wood.shop.dto.Item" alias="Item" />
+		<typeAlias type="wood.shop.dto.Category" alias="Category" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="wood/mybatis/Member.xml" />
 		<mapper resource="wood/mybatis/MemberLevel.xml" />
 		<mapper resource="wood/mybatis/Item.xml" />
+		<mapper resource="wood/mybatis/Category.xml" />
 	</mappers>
 
 </configuration>

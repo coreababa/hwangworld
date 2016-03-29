@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import wood.item.svc.CategoryService;
 import wood.item.svc.ItemService;
 import wood.member.svc.MemberLevelService;
 import wood.member.svc.MemberService;
+import wood.shop.dto.Category;
 import wood.shop.dto.Item;
 import wood.shop.dto.Member;
 import wood.shop.dto.MemberLevel;
@@ -26,6 +28,8 @@ public class AjaxController {
 	private ItemService itemsvc;
 	@Autowired
 	private MemberLevelService memberLevelsvc;
+	@Autowired
+	private CategoryService categorysvc;
 
 	@RequestMapping(value="/mem_chk.do", produces = "application/text; charset=utf8")
 	@ResponseBody 
@@ -66,6 +70,16 @@ public class AjaxController {
 		ArrayList<MemberLevel> memberLevelList= memberLevelsvc.memberLevelList(queryId, params);
 		System.out.println(memberLevelList);
 		return memberLevelList;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/admin/category_Ajax.do")
+	public ArrayList<Category> category_Ajax(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map){
+		String queryId="category.list";
+		ArrayList<Category> categorys= categorysvc.categoryList(queryId, params);
+		System.out.println(categorys);
+		return categorys;
 		
 	}
 	

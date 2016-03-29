@@ -12,21 +12,10 @@
 	</select>
 
 
-	<insert id="insert" parameterType="Member">
-		insert into member(
-		id_str,
-		passwd_str,
-		name_str,
-		email_str,
-		post_str,
-		addr_str,
-		addr2_str,
-		tel_str,
-		cel_str,
-		reg_date,
-		remote_addr_str )
-		values(#{id_str} ,#{passwd_str} ,#{name_str} ,#{email_str} ,#{post_str},
-		#{addr_str} ,#{addr2_str} ,#{tel_str} ,#{cel_str} ,now() ,#{remote_addr_str} )
+	<insert id="regist" parameterType="Member">
+		insert into member_level( level_name
+		 )
+		values(#{level_name} )
 	</insert>
 	
 	<update id="delete" parameterType="java.util.HashMap">

@@ -26,6 +26,19 @@ $(document).ready(function() {
 					, "s6RKZrjzjLY" // K.will (케이윌), Mamamoo (마마무), Feat. Whee sung (휘성) - Peppermint Chocolate (썸남썸녀)
 					, "CzRb7P7Ze7c" // 에디킴 (Eddy Kim) - 밀당의 고수 (Push & Pull)
 					,"nYecJyszM6s"
+					,"vv3YzqMpMmo"
+					,"M1JKbKK1woQ"
+					,"dXJnN9uP2o4"
+					,"eqcte1r3aiQ"
+					,"keWVwk_I8jM"
+					,"DP2w36k5H0U"
+					,"5QzvY5trcA4"
+					
+					,"TJNBpi3VAF0"
+					,"hsfGIT9zTSc"
+				,"nYecJyszM6s"
+					
+					
 					
 				]);
 				p.setLoop(true);

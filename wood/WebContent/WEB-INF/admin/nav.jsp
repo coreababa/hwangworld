@@ -209,6 +209,8 @@
 						회원레벨관리</a></li>
 				<!-- <li><a href="member.do"><i class="fa fa-dashboard fa-fw"></i>
 						회원상태관리</a></li> -->
+				<li><a href="item_category.do"><i class="fa fa-dashboard fa-fw"></i>
+						상품카테고리</a></li>
 				<li><a href="item.do"><i class="fa fa-dashboard fa-fw"></i>
 						상품관리</a></li>
 				<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>

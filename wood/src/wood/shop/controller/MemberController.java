@@ -109,6 +109,17 @@ public class MemberController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/admin/member_level_regist.do" )
+	public int member_level_regist(HttpServletRequest request, ModelAndView mav, @RequestParam Map<String, Object> map,
+			HttpSession session) {
+		String queryid = "memberlevel.regist";
+		map.put("remote_addr_str", request.getRemoteAddr());
+		return memberLevelsvc.update(queryid, map);
+		
+	}
+	
+	
 	
 		
 	@ResponseBody

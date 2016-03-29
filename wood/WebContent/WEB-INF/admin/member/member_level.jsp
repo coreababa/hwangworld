@@ -15,15 +15,17 @@
 		$("#submit_btn").click(function() {
 			
 			var form_data = $('#myModal').find("form").serializeArray();
-			alert(form_data);
+			var url=$('#myModal').find("form").attr("action");
+			
 			$.ajax({
-				url : "../admin/member_level_update.do",
+				url : url,
 				data : form_data,
 				dataType : "json",
 				type: 'post',
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success : function(data) {
 					$('#example').DataTable().ajax.reload();
+					$('#myModal').modal('hide');
 				}
 
 			});
@@ -38,6 +40,8 @@
 				$("#regi_btn").click(function(){
 					var form= $('#myModal').find("form");
 					form.attr("id","regi_form");
+					form.attr("action","../admin/member_level_regist.do");
+					$('#myModal').modal('show');
 					
 					$.each(form.find("input:text, input:hidden"), function(i, result) {
 						$("#" + result.id).val("");
@@ -52,7 +56,7 @@
 							"columnDefs" : [ {
 								"targets" : -1,
 								"data" : "remote_addr_str",
-								"defaultContent" : "<button id='update_btn'>수정</button> <button id='delete_btn'>삭제</button>"
+								"defaultContent" : "<button id='update_btn' class='btn btn-primary'>수정</button> <button id='delete_btn' class='btn btn-danger'>삭제</button>"
 							} ],
 							"ajax" : {
 								"url" : "../admin/member_level_Ajax.do",
@@ -80,7 +84,6 @@
 					// var data = table.row( this ).data();
 					var data = table.row($(this).parents('tr')).data();
 					var member_level_no = data.member_level_no;
-					
 					$.ajax({
 						url : "../admin/member_level_form.do",
 						type : "GET",
@@ -96,7 +99,11 @@
 							alert("에러났어");
 						}
 					});
-					$('#myModal').find("form").attr("id","member_update");
+				
+					
+					$('#myModal').find("form").attr("id","member_level_update");
+					var form= $('#myModal').find("form");
+					form.attr("action","../admin/member_level_update.do");
 					$('#myModal').modal('show');
 					
 				});
@@ -118,8 +125,6 @@
 							alert("에러났어");
 						}
 					});
-					
-
 				
 				});
 

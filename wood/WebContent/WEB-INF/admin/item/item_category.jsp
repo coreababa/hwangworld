@@ -31,7 +31,6 @@
 
 		});
 		
-		
 		$("#regi_btn").click(function(){
 			var form= $('#myModal').find("form");
 			form.attr("id","regi_form");
@@ -76,39 +75,41 @@ function datatables_loading(){
 		"lengthMenu" : [ [ 10, 25, 50, 100, -1 ],
 				[ 10, 25, 50, 100, "All" ] ],
 		"columnDefs" : [ {
-			"targets" : -1,
-			"data" : "remote_addr_str",
-			"defaultContent" : "<button id='update_btn' class='btn btn-primary'>수정</button> <button id='delete_btn' class='btn btn-danger'>삭제</button>"
-		},
-		{
 			"targets" : -2,
 			"data" : "remote_addr_str",
-			"defaultContent" : "<select></select>"
+			"defaultContent" : "<button id='update_btn' class='btn btn-primary'>수정</button> <button id='delete_btn' class='btn btn-danger'>삭제</button>"
 		}
 		],
 		"ajax" : {
-			"url" : "../admin/object.do",
+			"url" : "../admin/category_Ajax.do",
 			"dataSrc" : "",
 		},
 		"columns" : [ {
-			"data" : "member_no","width": "10%"
+			
+			"data" : "item_category_no","width": "10%"
 		}, {
-			"data" : "id_str"
-		},  {
-			"data" : "name_str"
-		}, {
-			"data" : "email_str"
-		}, {
-			"data" : "cel_str"
-		}, {
-			"data" : "member_level_name"
+			"data" : "category_name_str"
 		}, {
 			"data" : null
-		}, ]
+		},{
+			"data" : "item_category_no",
+			"orderable": false,
+			"searchable": false,
+			"render": function(data,type,row,meta) {
+				var a = '<div>'+data+'</div>';
+				return a;
+			}
+		}
+		
+		]
 	});
 }
 	
 	$(document).ready(function() {
+		
+		$('#example tbody').on('click', 'td.details-control', function () {
+	        
+	    } );
 
 		datatables_loading();
 		var table = $('#example').DataTable();
@@ -133,8 +134,6 @@ function datatables_loading(){
 					alert("에러났어");
 				}
 			});
-			
-			
 			
 			$.ajax({
 				url : "../admin/member_form.do",
@@ -244,7 +243,7 @@ function datatables_loading(){
 </script>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">회원관리</h1>
+		<h1 class="page-header">상품 카테고리</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -254,26 +253,17 @@ function datatables_loading(){
 	<thead>
 		<tr>
 			<th>번호</th>
-			<th>ID</th>
-			<th>이름</th>
-			<th>이메일</th>
-			<th>연락처</th>
-			<th>등급</th>
+			<th>카테고리명</th>
 			<th>수정 / 삭제</th>
-			
-
+			<th>수정 / 삭제</th>
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
 			<th>번호</th>
-			<th>ID</th>
-			<th>이름</th>
-			<th>이메일</th>
-			<th>연락처</th>
-			<th>등급</th>
+			<th>카테고리명</th>
 			<th>수정 / 삭제</th>
-
+			<th>수정 / 삭제</th>
 		</tr>
 	</tfoot>
 </table>
