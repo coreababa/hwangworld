@@ -13,6 +13,13 @@
 	     <if test="sel =='item_no'">item_no= #{item_no}</if>
 	</select>
 	
+	<select id="list" resultType="Item" parameterType="wood.shop.dto.ParamTO">
+	    
+	    <![CDATA[select * from item  where status_no = 2  order by  item_no limit #{startrow}, #{endrow}
+           ]]>
+	</select>
+	
+	
 
 
 </mapper>

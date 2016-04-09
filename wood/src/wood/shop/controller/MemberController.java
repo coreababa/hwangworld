@@ -31,14 +31,14 @@ public class MemberController {
 	@Autowired
 	private MemberLevelService memberLevelsvc;
 
-	@RequestMapping("/index.do")
+/*	@RequestMapping("/index.do")
 	public ModelAndView mainpage(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map) {
 		String queryId = "member.list2";
 		ArrayList<Member> memberList = membersvc.memberList(queryId, params);
 		mav.addObject("memberList", memberList);
 		mav.setViewName("index");
 		return mav;
-	}
+	}*/
 
 	@RequestMapping("/login_form.do")
 	public ModelAndView login_form(ModelAndView mav, ParamTO params, @RequestParam Map<String, Object> map) {
